@@ -47,14 +47,13 @@ export const panelCount = ({
   const pointGrid = [];
 
   // calcular todos los puntos desde donde podria comenzar un panel
-
   for (let y = yAxis; y > 0; y--) {
     for (let x = 0; x < xAxis; x++) {
       pointGrid.push([x, yAxis - y]);
     }
   }
 
-  // calcular los vertices panel horizontal
+  // calcular los vertices panel vertical
   for (let x = 0; x + aSide <= xAxis; x += aSide) {
     for (let y = yAxis; y - bSide >= 0; y -= bSide) {
       verticeHorizontal.push({
@@ -104,8 +103,6 @@ export const panelCount = ({
     .filter((count) => count.panels.length > 0);
 
   const panelsInstalled: PanelType[] = [];
-
-  let total = 0;
 
   pointGridPanel.forEach((pointPanel) => {
     // recorrer todos los puntos disponibles en el grid
