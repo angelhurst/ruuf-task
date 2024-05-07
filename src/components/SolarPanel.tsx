@@ -103,7 +103,7 @@ export const SolarPanel = () => {
               min={0}
               max={50}
               value={xAxisInput}
-              placeholder="X"
+              placeholder="Ancho"
               onChange={(e) => {
                 if (e.target.value.length > 0 && e.target.value != "0") {
                   if (parseInt(e.target.value) >= 50) {
@@ -124,7 +124,7 @@ export const SolarPanel = () => {
               min={0}
               max={100}
               value={yAxisInput}
-              placeholder="Y"
+              placeholder="Alto"
               onChange={(e) => {
                 if (e.target.value.length > 0 && e.target.value != "0") {
                   if (parseInt(e.target.value) >= 50) {
@@ -148,30 +148,9 @@ export const SolarPanel = () => {
             <input
               type="number"
               min={0}
-              max={50}
-              value={aSideInput}
-              placeholder="A"
-              onChange={(e) => {
-                if (e.target.value.length > 0 && e.target.value != "0") {
-                  if (parseInt(e.target.value) >= 50) {
-                    setASide(50);
-                    setASideInput("50");
-                  } else {
-                    setASide(parseInt(e.target.value));
-                    setASideInput(e.target.value);
-                  }
-                } else {
-                  setASide(undefined);
-                  setASideInput("");
-                }
-              }}
-            />
-            <input
-              type="number"
-              min={0}
               max={100}
               value={bSideInput}
-              placeholder="B"
+              placeholder="Ancho"
               onChange={(e) => {
                 if (e.target.value.length > 0 && e.target.value != "0") {
                   if (parseInt(e.target.value) >= 50) {
@@ -184,6 +163,27 @@ export const SolarPanel = () => {
                 } else {
                   setBSide(undefined);
                   setBSideInput("");
+                }
+              }}
+            />
+            <input
+              type="number"
+              min={0}
+              max={50}
+              value={aSideInput}
+              placeholder="Alto"
+              onChange={(e) => {
+                if (e.target.value.length > 0 && e.target.value != "0") {
+                  if (parseInt(e.target.value) >= 50) {
+                    setASide(50);
+                    setASideInput("50");
+                  } else {
+                    setASide(parseInt(e.target.value));
+                    setASideInput(e.target.value);
+                  }
+                } else {
+                  setASide(undefined);
+                  setASideInput("");
                 }
               }}
             />
