@@ -1,6 +1,5 @@
 import styles from "./page.module.css";
 import { SolarPanel } from "@/components/SolarPanel";
-import { PanelCalcType } from "@/utils";
 
 export default function Home() {
   return (
