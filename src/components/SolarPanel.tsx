@@ -19,7 +19,7 @@ export const SolarPanel = () => {
   const [bSideInput, setBSideInput] = useState<string>("");
   const [firstCanvas, setFirstCanvas] = useState<PanelCalcType>();
 
-  const canvasRef = useRef(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     if (xAxis && yAxis && aSide && bSide) {
@@ -40,48 +40,55 @@ export const SolarPanel = () => {
       };
 
       const canvas = canvasRef.current;
-      const ctx = canvas.getContext("2d");
-      ctx.clearRect(0, 0, xAxis * 100, yAxis * 100);
-      ctx.strokeStyle = "#5a6ed5";
-      ctx.font = "30px Arial";
-      ctx.fillStyle = "black"; // Color del texto
 
-      const panelV = panelCount(optionsV);
-      const panelH = panelCount(optionsH);
+      if (canvas) {
+        const ctx = canvas.getContext("2d");
+        if (ctx) {
+          ctx.clearRect(0, 0, xAxis * 100, yAxis * 100);
+          ctx.strokeStyle = "#5a6ed5";
+          ctx.font = "30px Arial";
+          ctx.fillStyle = "black"; // Color del texto
 
-      const panelTotal = panelH.length > panelV.length ? panelH : panelV;
-      setFirstCanvas(panelH.length > panelV.length ? optionsH : optionsV);
+          const panelV = panelCount(optionsV);
+          const panelH = panelCount(optionsH);
 
-      panelTotal.map((panel, index) => {
-        if (panel.direcction == "vertical") {
-          ctx.strokeRect(
-            panel.a[0] * 100,
-            panel.a[1] * 100,
-            panel.width * 100,
-            panel.height * 100
-          );
-        } else {
-          ctx.strokeRect(
-            panel.a[0] * 100,
-            panel.a[1] * 100,
-            panel.width * 100,
-            panel.height * 100
-          );
+          const panelTotal = panelH.length > panelV.length ? panelH : panelV;
+          setFirstCanvas(panelH.length > panelV.length ? optionsH : optionsV);
+
+          panelTotal.map((panel, index) => {
+            if (panel.direcction == "vertical") {
+              ctx.strokeRect(
+                panel.a[0] * 100,
+                panel.a[1] * 100,
+                panel.width * 100,
+                panel.height * 100
+              );
+            } else {
+              ctx.strokeRect(
+                panel.a[0] * 100,
+                panel.a[1] * 100,
+                panel.width * 100,
+                panel.height * 100
+              );
+            }
+            if (panel.direcction == "vertical") {
+              const num = index + 1;
+              ctx.fillText(
+                num.toString(),
+                panel.a[0] * 100 + (panel.width * 100) / 2 - 10,
+                panel.a[1] * 100 + (panel.height * 100) / 2 + 15
+              );
+            } else {
+              const num = index + 1;
+              ctx.fillText(
+                num.toString(),
+                panel.a[0] * 100 + (panel.width * 100) / 2 - 10,
+                panel.a[1] * 100 + (panel.height * 100) / 2 + 15
+              );
+            }
+          });
         }
-        if (panel.direcction == "vertical") {
-          ctx.fillText(
-            index + 1,
-            panel.a[0] * 100 + (panel.width * 100) / 2 - 10,
-            panel.a[1] * 100 + (panel.height * 100) / 2 + 15
-          );
-        } else {
-          ctx.fillText(
-            index + 1,
-            panel.a[0] * 100 + (panel.width * 100) / 2 - 10,
-            panel.a[1] * 100 + (panel.height * 100) / 2 + 15
-          );
-        }
-      });
+      }
     }
   }, [aSide, bSide, xAxis, yAxis]);
 
@@ -188,8 +195,12 @@ export const SolarPanel = () => {
           <canvas
             className={style.canvas}
             ref={canvasRef}
-            width={xAxis ? xAxis * 100 : firstCanvas?.xAxis * 100}
-            height={yAxis ? yAxis * 100 : firstCanvas?.yAxis * 100}
+            width={
+              xAxis ? xAxis * 100 : firstCanvas ? firstCanvas.xAxis * 100 : 0
+            }
+            height={
+              yAxis ? yAxis * 100 : firstCanvas ? firstCanvas.yAxis * 100 : 0
+            }
           />
         </div>
       )}
