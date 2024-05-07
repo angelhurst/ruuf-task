@@ -29,3 +29,13 @@
 .by:hover {
   color: #272931;
 }
+
+@media (max-width: 768px) {
+  .control {
+    flex-direction: column;
+    font-size: 36px;
+  }
+  .by {
+    font-size: 16px;
+  }
+}

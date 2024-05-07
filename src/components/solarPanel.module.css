@@ -65,3 +65,12 @@
   background: #f9faff;
   border: 1px #3a4db4 solid;
 }
+
+@media (max-width: 768px) {
+  .containerControl {
+    flex-direction: column;
+  }
+  .inputGroup {
+    min-width: 300px;
+  }
+}
