@@ -11,6 +11,7 @@ export default function Home() {
       <a href={"https://angelhurst.github.io/"} className={styles.by}>
         by @angelhurst
       </a>
+      <br />
     </main>
   );
 }
